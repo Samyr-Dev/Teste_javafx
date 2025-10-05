@@ -1,5 +1,5 @@
 # Projeto de JavaFX - Criando uma Interface - Programação Orientada a Objetos 2
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/Samyr-Dev/Teste_javafx/blob/main/LICENSE) 
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/Samyr-Dev/sys-icm/blob/main/LICENSE) 
 
 # Sobre o projeto
 
@@ -10,8 +10,13 @@ Foram criadas telas interativas que permitem reforçar a integração entre **l�
 Mais do que apenas a prática visual, o projeto possibilita compreender como a **separação de responsabilidades** (código e interface) fortalece a manutenção e escalabilidade do software.  
 
 # Tecnologias utilizadas
+
+## IDEs e Aplicativos
+- Intellij IDEA Community
+- Scene Builder
+
 ## Front end
-- JavaFX  
+- JavaFX
 
 ## Back end
 - Java 17
@@ -24,7 +29,7 @@ Mais do que apenas a prática visual, o projeto possibilita compreender como a *
 
 ~~~bash
 # clonar repositório
-git clone https://github.com/Samyr-Dev/Teste_javafx
+git clone https://github.com/Samyr-Dev/sys-icm
 
 # abrir o projeto em uma IDE (recomendável IntelliJ IDEA ou Eclipse)
 # configurar as bibliotecas do JavaFX
