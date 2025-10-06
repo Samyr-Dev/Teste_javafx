@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.teste_javafx.controller.MainController">
     <children>
         <MenuBar>
             <menus>
@@ -52,17 +52,17 @@
                                 <Label text="Nome:" />
                                 <Label text="Altura:" GridPane.rowIndex="2" />
                                 <Label text="Peso:" GridPane.rowIndex="4" />
-                                <TextField promptText="Digite o seu nome" GridPane.rowIndex="1">
+                                <TextField fx:id="txtNome" promptText="Digite o seu nome" GridPane.rowIndex="1">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </TextField>
-                                <TextField promptText="Digite a sua altura" GridPane.rowIndex="3">
+                                <TextField fx:id="txtAltura" promptText="Digite a sua altura" GridPane.rowIndex="3">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
                                 </TextField>
-                                <TextField promptText="Digite o seu peso" GridPane.rowIndex="5">
+                                <TextField fx:id="txtPeso" promptText="Digite o seu peso" GridPane.rowIndex="5">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -74,11 +74,11 @@
                         </GridPane>
                         <HBox alignment="CENTER" prefHeight="96.0" prefWidth="303.0">
                             <children>
-                                <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" text="Calcular IMC">
+                                <Button mnemonicParsing="false" onAction="#onCalcularIMCClick" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #0066ff;" text="Calcular IMC" textFill="WHITE">
                            <font>
                               <Font size="13.0" />
                            </font></Button>
-                                <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" text="Salvar">
+                                <Button mnemonicParsing="false" onAction="#onSalvarIMCClick" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #0066ff;" text="Salvar" textFill="WHITE">
                                     <HBox.margin>
                                         <Insets left="10.0" right="10.0" />
                                     </HBox.margin>
@@ -86,7 +86,7 @@
                               <Font size="13.0" />
                            </font>
                                 </Button>
-                                <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="200.0" text="Carregar Dados">
+                                <Button mnemonicParsing="false" onAction="#onCarregarDadosIMC" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #0066ff;" text="Carregar Dados" textFill="WHITE">
                            <font>
                               <Font size="13.0" />
                            </font></Button>
@@ -104,7 +104,7 @@
                                 <Font name="System Bold" size="24.0" />
                             </font>
                         </Label>
-                        <Label text="00.00">
+                        <Label fx:id="lbIMC" text="00.00">
                             <VBox.margin>
                                 <Insets bottom="20.0" top="20.0" />
                             </VBox.margin>
@@ -112,18 +112,21 @@
                                 <Font size="96.0" />
                             </font>
                         </Label>
-                        <Label />
+                        <Label fx:id="lbclassificacao" alignment="CENTER" contentDisplay="CENTER" prefHeight="48.0" prefWidth="138.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Label>
                     </children>
                 </VBox>
             </children>
         </HBox>
-        <TableView prefHeight="200.0" prefWidth="200.0">
+        <TableView fx:id="tabelaDados" prefHeight="200.0" prefWidth="200.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="260.0" text="NOME" />
-                <TableColumn prefWidth="106.0" text="ALTURA" />
-                <TableColumn prefWidth="117.0" text="PESO" />
-                <TableColumn prefWidth="117.0" text="IMC" />
+                <TableColumn fx:id="colunaID" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="colunaNome" prefWidth="260.0" text="NOME" />
+                <TableColumn fx:id="colunaAltura" prefWidth="106.0" text="ALTURA" />
+                <TableColumn fx:id="colunaPeso" prefWidth="117.0" text="PESO" />
+                <TableColumn fx:id="colunaIMC" prefWidth="117.0" text="IMC" />
             </columns>
         </TableView>
     </children>
