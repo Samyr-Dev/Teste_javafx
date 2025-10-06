@@ -59,12 +59,21 @@ public class MainController {
         float altura = Float.parseFloat(txtAltura.getText());
         float peso = Float.parseFloat(txtPeso.getText());
         float valorImc = this.pessoa.calcularIMC();
+        colunaID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colunaAltura.setCellValueFactory(new PropertyValueFactory<>("altura"));
+        colunaPeso.setCellValueFactory(new PropertyValueFactory<>("peso"));
+        colunaIMC.setCellValueFactory(new PropertyValueFactory<>("imc"));
 
+        int novoID = ++proximoID;
+
+        Pessoa novaLinha = new Pessoa(novoID, nome, altura, peso, valorImc);
+
+        tabelaDados.getItems().add(novaLinha);
         }
 
         @FXML
         protected void onCarregarDadosIMC(){
-        
 
 
 
