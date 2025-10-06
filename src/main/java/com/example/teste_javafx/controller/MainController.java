@@ -1,16 +1,23 @@
 package com.example.teste_javafx.controller;
 
 import com.example.teste_javafx.model.Pessoa;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class MainController {
+public class MainController implements Initializable {
 
     @FXML
     public TextField txtNome;
@@ -34,48 +41,71 @@ public class MainController {
     private TableColumn<Pessoa, Double> colunaPeso;
     @FXML
     private TableColumn<Pessoa, Double> colunaIMC;
-    int proximoID = 0;
-
-    Pessoa pessoa = new Pessoa();
-
-    @FXML
-    protected void onCalcularIMCClick(){
-        DecimalFormat df = new DecimalFormat();
-
-        this.pessoa.setNome(this.txtNome.getText());
-        this.pessoa.setAltura(Float.parseFloat(this.txtAltura.getText()));
-        this.pessoa.setPeso(Float.parseFloat(this.txtPeso.getText()));
+    private int proximoID = 0;
 
 
-        df.applyPattern("#0.00");
-        this.lbIMC.setText(df.format(this.pessoa.calcularIMC()));
-        this.lbclassificacao.setText(this.pessoa.classificacaoIMC());
+    Pessoa pessoa;
+    List<Pessoa> listaPessoas;
+    ObservableList<Pessoa> observableListPessoas;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.pessoa = new Pessoa();
+        this.listaPessoas = new ArrayList<>();
+        vinculoComTabela();
     }
 
-    @FXML
-    protected void onSalvarIMCClick(){
-
-        String nome = txtNome.getText();
-        float altura = Float.parseFloat(txtAltura.getText());
-        float peso = Float.parseFloat(txtPeso.getText());
-        float valorImc = this.pessoa.calcularIMC();
+    public void vinculoComTabela() {
         colunaID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colunaAltura.setCellValueFactory(new PropertyValueFactory<>("altura"));
         colunaPeso.setCellValueFactory(new PropertyValueFactory<>("peso"));
         colunaIMC.setCellValueFactory(new PropertyValueFactory<>("imc"));
+    }
 
+    public void lerFormulario() {
+        this.pessoa.setNome(txtNome.getText());
+        this.pessoa.setPeso(Float.parseFloat(txtPeso.getText()));
+        this.pessoa.setAltura(Float.parseFloat(txtAltura.getText()));
+    }
+
+    public void atualizarTableView() {
+        this.listaPessoas.forEach(obj -> System.out.printf(obj.getNome() + ", " + obj.getPeso() + ", " + obj.getAltura() + "\n"));
+        this.observableListPessoas = FXCollections.observableList(this.listaPessoas);
+        this.tabelaDados.setItems(this.observableListPessoas);
+    }
+
+    public void exibirClassificacaoIMC() {
+        DecimalFormat df = new DecimalFormat();
+        df.applyPattern("#0.00");
+        lbIMC.setText(df.format(this.pessoa.calcularIMC()));
+        lbclassificacao.setText(this.pessoa.classificacaoIMC());
+    }
+
+
+    @FXML
+    protected void onCalcularIMCClick() {
+        lerFormulario();
+        this.pessoa.classificacaoIMC();
+        exibirClassificacaoIMC();
+        System.out.println(this.pessoa.toString());
+    }
+
+    @FXML
+    protected void onSalvarIMCClick() {
+        lerFormulario();
         int novoID = ++proximoID;
+        this.pessoa.setID(novoID);
+        this.listaPessoas.add(pessoa);
+        atualizarTableView();
+    }
 
-        Pessoa novaLinha = new Pessoa(novoID, nome, altura, peso, valorImc);
-
-        tabelaDados.getItems().add(novaLinha);
-        }
-
-        @FXML
-        protected void onCarregarDadosIMC(){
-
-
-
+    @FXML
+    protected void onCarregarDadosIMC() {
+        this.pessoa = new Pessoa();
+        txtNome.setText("");
+        txtPeso.setText("");
+        txtAltura.setText("");
     }
 }
